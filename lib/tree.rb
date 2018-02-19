@@ -3,13 +3,14 @@ class NoApplesError < StandardError; end
 class Tree
   attr_accessor :age, :apples, :height
 
-  def initialize
-    @age = 0
+  def initialize (age = 0)
+    @age = age
     @apples = []
     @height = 0.0
   end
 
   def age!
+    raise DeadTreeError, "This tree is dead!" unless !self.dead?
     @age += 1
     @height += rand
     if(@age >= 10)
